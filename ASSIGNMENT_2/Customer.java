@@ -223,7 +223,7 @@ public class Customer extends User {
     public boolean check_product_quantities(){
         int flag=0;
         for(int i=0;i<this.cart.size();i++){
-            if((get_deal_quantity(this.cart.get(i))+this.product_quantities.get(i))<this.cart.get(i).getProduct_quantity()){
+            if((get_deal_quantity(this.cart.get(i))+this.product_quantities.get(i))>this.cart.get(i).getProduct_quantity()){
                 flag=1;
 //                this.cart.remove(i);
             }
@@ -233,7 +233,7 @@ public class Customer extends User {
     public void print_order_details(){
         ArrayList<Float> charges=this.get_total_cost();     //[total cost, delivery charges, max_discount]
         if(this.coupons.contains(Math.round(charges.get(2)))){
-            this.coupons.remove(Math.round(charges.get(2)));        //remove coupon after use
+            this.coupons.remove((Object)(Math.round(charges.get(2))));        //remove coupon after use
         }
         this.update_product_quantities();
         System.out.println("\n\nDelivery charges = ₹ "+charges.get(1));
